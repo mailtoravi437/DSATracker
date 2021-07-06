@@ -1,0 +1,68 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while(t-->0){
+            int V = sc.nextInt();
+            int E = sc.nextInt();
+
+            ArrayList<ArrayList<Integer>> alist = new ArrayList<>();
+
+            for(int i=0;i<V;i++){
+                alist.add(i,new ArrayList<>());
+            }
+
+            boolean ans = checkCycle(alist,V);
+            if(ans==true){
+                System.out.println("Yes");
+            }
+            else{
+                System.out.println("No");
+            }
+        }
+    }
+
+    public static boolean checkCycle(ArrayList<ArrayList<Integer>> alist,int V){
+        boolean visited[] = new boolean[V];
+        boolean DFSres[] = new boolean[V];
+
+        Arrays.fill(visited,false);
+        Arrays.fill(DFSres,false);
+
+        for(int i=0;i<V;i++){
+            if(visited[i]==false){
+                if(isCycle(alist,visited,DFSres,i,V)==true){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean isCycle(ArrayList<ArrayList<Integer>> alist,boolean visited[],boolean DFSres[],int i, int V){
+        visited[i] = true;
+        DFSres[i] = true;
+
+        Iterator<Integer> it = alist.get(i).listIterator();
+
+        while(it.hasNext()){
+            int n = it.next();
+
+            if(visited[n]==false){
+                if(isCycle(alist,visited,DFSres,n,V)==true){
+                    return true;
+                }
+
+                else if(DFSres[n]==true){
+                    return true;
+                }
+            }
+        }
+
+        DFSres[n] = false;
+    }
+}
