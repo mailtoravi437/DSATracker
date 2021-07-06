@@ -1,0 +1,45 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while(t-->0){
+            int V = sc.nextInt();
+            int E = sc.nextInt();
+        
+
+        ArrayList<ArrayList<Integer>> alist = new ArrayList<>();
+
+        while(E-->0){
+            int u = sc.nextInt();
+            int v = sc.nextInt();
+
+            alist.get(u).add(v);
+            alist.get(v).add(u);
+        }
+
+        ArrayList<Integer> ans = new ArrayList<>();
+        boolean visited[] = new boolean[V];
+
+        DFS(alist,0,visited,ans);
+    }
+
+    }
+
+    public static void DFS(ArrayList<ArrayList<Integer>> alist,int i,boolean visited[],ArrayList<Integer> ans){
+        visited[i] = true;
+        ans.add(i);
+
+        Iterator<Integer> it = alist.get(i).listIterator();
+
+        while(it.hasNext()){
+            int n = it.next();
+            if(visited[n]==false){
+                DFS(alist,n,visited,ans);
+            }
+        }
+    }
+}
