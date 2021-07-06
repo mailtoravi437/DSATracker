@@ -1,0 +1,51 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while(t-->0){
+            int N = sc.nextInt();
+            int E = sc.nextInt();
+        
+
+        ArrayList<ArrayList<Integer>> alist = new ArrayList<>();
+
+        for(int i=0;i<N;i++){
+            alist.add(i,new ArrayList<>());
+        }
+
+        while(E-->0){
+            int u = sc.nextInt();
+            int v = sc.nextInt();
+
+            alist.get(u).add(v);
+            alist.get(v).add(u);
+        }
+
+        boolean visited[] = new boolean[N];
+        Arrays.fill(visited,false);
+
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(0);
+
+        ArrayList<Integer> ans = new ArrayList<>();
+
+
+        while(queue.isEmpty()==false){
+            int x = queue.poll();
+            ans.add(x);
+
+            Iterator<Integer> it = alist.get(x).listIterator();
+            while(it.hasNext()){
+                if(visited[it.next()]==false){
+                    visited[it.next()] = true;
+                    queue.add(it.next());
+                }
+            }
+        }
+    }
+    }
+}
