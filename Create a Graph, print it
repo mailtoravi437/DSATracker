@@ -1,0 +1,36 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while(t-->0){
+            int N = sc.nextInt();
+            int E = sc.nextInt();
+
+            ArrayList<ArrayList<Integer>> alist = new ArrayList<>();
+
+            for(int i=0;i<N;i++){
+                alist.add(i,new ArrayList<>());
+            }
+
+            while(E-->0){
+                int u = sc.nextInt();
+                int v = sc.nextInt();
+
+                alist.add(u).add(v);
+                alist.add(v).add(u);
+            }
+
+            for(int i=0;i<N;i++){
+                for(int j=0;j<alist.get(i).size();j++){
+                    System.out.println(alist.get(i).get(j));
+                }
+
+                System.out.println();
+            }
+        }
+    }
+}
